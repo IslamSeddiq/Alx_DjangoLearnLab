@@ -12,4 +12,5 @@ book = Book.objects.create(
     publication_year=1949
 )
 
-book  # Expected Output: <Book: 1984>
+# Expected Output: 1984 by George Orwell (1949)
+
