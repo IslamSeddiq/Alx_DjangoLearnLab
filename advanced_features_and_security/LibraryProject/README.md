@@ -36,3 +36,18 @@
 - Manually tested CSRF tokens in forms
 - Verified that untrusted script injections are blocked
 - Confirmed that SQL injection attempts are neutralized
+
+# Security Setup
+
+## HTTPS & Secure Headers
+- Enforced HTTPS with `SECURE_SSL_REDIRECT = True`.
+- HSTS enabled for 1 year (`SECURE_HSTS_SECONDS = 31536000`).
+- Secure cookies (`SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`).
+- Added headers: 
+  - `X_FRAME_OPTIONS = "DENY"`
+  - `SECURE_CONTENT_TYPE_NOSNIFF = True`
+  - `SECURE_BROWSER_XSS_FILTER = True`
+
+## Deployment
+- Configured SSL/TLS certificates using Let's Encrypt.
+- Nginx redirects all HTTP → HTTPS.
