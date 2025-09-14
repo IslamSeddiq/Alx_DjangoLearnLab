@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from django.views.generic import TemplateView
 from django.views.generic import DetailView
@@ -8,6 +8,17 @@ from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required
+from .forms import ExampleForm
+
+def example_form_view(request):
+    if request.method == "POST":
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("book_list")  # assumes you have a book_list view
+    else:
+        form = ExampleForm()
+    return render(request, "bookshelf/form_example.html", {"form": form})
 
 def search_books(request):
     query = request.GET.get("q", "")
@@ -78,6 +89,7 @@ class BookDetailView(DetailView):
             context['average_rating'] = None  # fallback
 
         return context
+
 
 
 
