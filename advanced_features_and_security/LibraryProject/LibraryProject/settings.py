@@ -12,6 +12,25 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+# settings.py
+
+# Never keep DEBUG=True in production
+DEBUG = False  
+
+# Browser-side protections
+SECURE_BROWSER_XSS_FILTER = True   # Helps mitigate XSS attacks
+SECURE_CONTENT_TYPE_NOSNIFF = True # Prevents MIME-type sniffing
+X_FRAME_OPTIONS = "DENY"           # Prevents clickjacking
+
+# Cookies: ensure they are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# (Optional but recommended)
+SECURE_HSTS_SECONDS = 31536000     # Force HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
 AUTHENTICATION_BACKENDS = [
     "bookshelf.backends.EmailBackend",  # Your custom backend
     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as a fallback
@@ -135,4 +154,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
 
