@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+CSP_DEFAULT_SRC = ("'self'",)  # Only load content from same domain
+CSP_SCRIPT_SRC = ("'self'", "cdn.jsdelivr.net")  # Allow scripts only from self and CDN
+CSP_STYLE_SRC = ("'self'", "fonts.googleapis.com")
+CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
 
 # settings.py
 
@@ -155,6 +159,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
 
 
 
