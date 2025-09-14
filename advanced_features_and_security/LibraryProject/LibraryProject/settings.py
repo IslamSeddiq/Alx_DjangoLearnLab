@@ -37,6 +37,9 @@ CSP_SCRIPT_SRC = ("'self'", "cdn.jsdelivr.net")  # Allow scripts only from self 
 CSP_STYLE_SRC = ("'self'", "fonts.googleapis.com")
 CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
 
+# Trust the X-Forwarded-Proto header set by your proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # settings.py
 
 # Never keep DEBUG=True in production
@@ -180,6 +183,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+
 
 
 
