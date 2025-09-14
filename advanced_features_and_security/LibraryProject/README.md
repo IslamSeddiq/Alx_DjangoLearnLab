@@ -15,3 +15,24 @@
 - Permissions are enforced in views with `@permission_required`.
 - Users inherit permissions from their assigned group.
 - Test by creating users and adding them to groups via the admin site.
+
+# Security Measures Implemented
+
+## Settings
+- DEBUG = False in production
+- XSS, CSRF, and Clickjacking protections enabled via Django settings
+- Cookies secured with CSRF_COOKIE_SECURE and SESSION_COOKIE_SECURE
+
+## Views
+- All forms include {% csrf_token %}
+- ORM queries used instead of raw SQL to prevent SQL injection
+- Input validated using Django Forms
+
+## CSP
+- Implemented strict Content Security Policy using django-csp middleware
+- Only self-hosted content allowed, with exceptions for trusted CDNs
+
+## Testing
+- Manually tested CSRF tokens in forms
+- Verified that untrusted script injections are blocked
+- Confirmed that SQL injection attempts are neutralized
