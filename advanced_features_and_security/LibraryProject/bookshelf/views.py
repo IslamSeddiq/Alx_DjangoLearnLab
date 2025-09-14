@@ -6,7 +6,32 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import permission_required
 
+
+@permission_required('bookshelf.can_view', raise_exception=True)
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, "bookshelf/book_list.html", {"books": books})
+
+
+@permission_required('bookshelf.can_create', raise_exception=True)
+def book_create(request):
+    # example placeholder
+    return HttpResponse("Book created (only users with can_create can access this).")
+
+
+@permission_required('bookshelf.can_edit', raise_exception=True)
+def book_edit(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    return HttpResponse(f"Editing book: {book.title} (only users with can_edit can access).")
+
+
+@permission_required('bookshelf.can_delete', raise_exception=True)
+def book_delete(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    return HttpResponse(f"Deleting book: {book.title} (only users with can_delete can access).")
 
 def home(request):
     return HttpResponse("Hello! This is the bookshelf home page.")
@@ -48,3 +73,4 @@ class BookDetailView(DetailView):
             context['average_rating'] = None  # fallback
 
         return context
+
