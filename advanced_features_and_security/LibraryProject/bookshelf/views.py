@@ -10,9 +10,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 
 def search_books(request):
-    query = request.GET.get("q")
-    books = Book.objects.raw(f"SELECT * FROM bookshelf_book WHERE title LIKE '%{query}%'")
+    query = request.GET.get("q", "")
+    books = Book.objects.filter(title__icontains=query)
     return render(request, "bookshelf/book_list.html", {"books": books})
+
 
 @permission_required('bookshelf.can_view', raise_exception=True)
 def book_list(request):
@@ -77,6 +78,7 @@ class BookDetailView(DetailView):
             context['average_rating'] = None  # fallback
 
         return context
+
 
 
 
