@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #343a40;
+            padding: 1rem;
+            color: white;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 3rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 2rem;
+            height: 350px;
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .card-icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem; /* pushes it just below the cards */
+            background: #343a40;
+            color: white;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Django Library Portal</h1>
+    </header>
+
+    <div class="card-grid">
+        <div class="card">
+            <a href="{% url 'post-list-create' %}">
+                <div class="card-icon">📝</div>
+                <div>Blog Posts</div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/api/books/">
+                <div class="card-icon">📖</div>
+                <div>Books API</div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/api/authors/">
+                <div class="card-icon">👨‍💼</div>
+                <div>Authors API</div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/api/users/">
+                <div class="card-icon">👥</div>
+                <div>Users API</div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/signup/">
+                <div class="card-icon">📝</div>
+                <div>Register</div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="/login/">
+                <div class="card-icon">🔑</div>
+                <div>Login</div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Django Blog</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
